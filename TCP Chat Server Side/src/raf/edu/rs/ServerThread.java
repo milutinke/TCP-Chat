@@ -41,8 +41,7 @@ public class ServerThread implements Runnable {
 				out.println("All that you need is to type: /login YourNameHere");
 			}
 
-			// Loopujemo sve dok klijent ne posalje Disconnect ili ne prekine/izgubi vezu sa
-			// serverom
+			// Loopujemo sve dok klijent ne posalje Disconnect ili ne prekine/izgubi vezu sa serverom
 			while (true) {
 				input = in.readLine();
 
@@ -55,7 +54,7 @@ public class ServerThread implements Runnable {
 
 				// Prijava klijenta
 				if (!Server.getConnectedClients().containsKey(clientSocket)) {
-					// Ako klijent salje nesta sto nije poruka za prijavu, onda ne prisledjujemo
+					// Ako klijent salje nesta sto nije poruka za prijavu, onda ne prosledjujemo
 					// drugim povezanim klijentima i preskacemo ciklus u petlji
 					// Takodje saljemo mu poruku da mora da se prijavi da bi mogao/la da razgovara
 					// sa drugima
@@ -83,8 +82,7 @@ public class ServerThread implements Runnable {
 					// i prijavljenih klijenata
 					Server.getConnectedClients().put(clientSocket, name);
 
-					// Brisemo sadrzaj klijentove konzole i prosledjujemo poruku klijentu da uspesno
-					// prijavio/la
+					// Brisemo sadrzaj konzole klijenta i prosledjujemo mu poruku da se uspesno prijavio/la
 					out.println("clear");
 					out.println("You have successsfully logged in!");
 
@@ -113,18 +111,18 @@ public class ServerThread implements Runnable {
 				}
 
 				// Proveravamo da li je korisnik poslao praznu poruku
-				// Ako jeste, onda preskacemo sledece ranje i ciklus u petlji
+				// Ako jeste, onda preskacemo sledece radnje i ciklus u petlji
 				if (input.length() <= 0)
 					continue;
 
-				// Proveravamo ako klijent pokusava da se prijavi a vec je prjavljen
+				// Proveravamo ako klijent pokusava da se prijavi, a vec je prjavljen
 				if (SimpleTokenizer.hasToken(input, "/login")) {
 					out.println("You are already logged in!");
 					continue;
 				}
 
 				// Ako korisnik zahteva da obrise ekran
-				// Saljemo mu sve komandu clear
+				// Saljemo mu komandu clear
 				if (SimpleTokenizer.hasToken("/clear", input)) {
 					out.println("clear");
 					continue;
